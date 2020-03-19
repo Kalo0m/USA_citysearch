@@ -17,8 +17,9 @@ const useZomatoApi = {
           return response.json();
         })
         .then(data => {
-          console.log(data);
-          const RESTAURANT_API_URL = `https://developers.zomato.com/api/v2.1/establishments?city_id=${data}`
+
+          const RESTAURANT_API_URL = `https://developers.zomato.com/api/v2.1/search?entity_id=${data.location_suggestions[0].id}&entity_type=city&count=50&sort=rating&order=desc
+          `
           
             fetch(RESTAURANT_API_URL, {
               method: "GET",
@@ -29,7 +30,7 @@ const useZomatoApi = {
               .then(function (response) {
                 return response.json();
               }).then(data => {
-                console.log(data)
+                resolve(data);
               })
               .catch(err => reject(err));
         })

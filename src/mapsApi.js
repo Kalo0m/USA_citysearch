@@ -1,25 +1,19 @@
-const API_KEY = "AIzaSyBl7aFudbT6C_h5C4LDCbvMqGpE5_khQLk";
-
+const API_KEY = "AIzaSyDaUmCs51pPFzPnI9oZzA8egp35R_GtF7w";
+const proxyurl = "https://cors-anywhere.herokuapp.com/";
 const useMapApi = {
-    getCities: ville => {
-        new Promise((resolve, reject) => {
+    getCities: ville => 
+        
+         new Promise((resolve, reject) => {
             const CITY_API_URL = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${ville}&types=(cities)&language=fr&key=${API_KEY}&components=country:us
               `;
-            console.log(CITY_API_URL);
-            fetch(CITY_API_URL, {
-                mode: 'no-cors',
-                method: "GET"
-            }).then(response => {
-                console.log('res de fetch map api json : ');
-                console.log(response);
+            fetch(proxyurl + CITY_API_URL).then(response => {
+                
                 return response.json();
             }).then(data => {
-                console.log('res de fetch map api : '); 
-                console.log(data);
                 resolve(data);
             }).catch(err => reject(err));
 
-        })}
+        })
         
 
 }
