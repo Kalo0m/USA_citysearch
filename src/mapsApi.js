@@ -6,8 +6,8 @@ const useMapApi = {
          new Promise((resolve, reject) => {
             const CITY_API_URL = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${ville}&types=(cities)&language=fr&key=${API_KEY}&components=country:us
               `;
-            fetch(proxyurl + CITY_API_URL).then(response => {
-                
+            fetch(proxyurl+CITY_API_URL)
+            .then(response => {  
                 return response.json();
             }).then(data => {
                 resolve(data);
