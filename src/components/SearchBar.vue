@@ -61,7 +61,7 @@
 </style>-->
 <template>
 <v-card>
-  <div>
+  <div class="text-center">
     <v-toolbar :dark="true">
       <v-toolbar-title>Ville selection</v-toolbar-title>
       <div class="autoc">
@@ -79,6 +79,7 @@
       <v-btn @click="onSubmit" icon>
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
+      <v-switch :label="`Dark Theme`" @change="darkChange"></v-switch>
     </v-toolbar>
     
   </div>
@@ -102,7 +103,8 @@ export default {
   data: () => ({
     villes: [],
     input: '',
-    error : false
+    error : false,
+    goDark : false
   }),
 
   methods: {
@@ -135,6 +137,10 @@ export default {
       }
       
     },
+    darkChange : function(){
+      this.goDark = !this.goDark;
+      this.$emit('darkChanged',this.goDark);
+    }
     
   }
 };

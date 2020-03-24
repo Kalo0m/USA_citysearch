@@ -4,12 +4,18 @@
 
     <v-content >
       <div v-if = "this.ville == ''">
-        <SearchBar v-on:envoieVille="villeRecu" class='search-container'/>
+        <SearchBar v-on:darkChanged="darkChanged" v-on:envoieVille="villeRecu" class='search-container'/>
       </div>
       <div v-else>
-        <SearchBar v-on:envoieVille="villeRecu"/>
-        <ListeRestau v-bind:ville="ville"/>
-
+        
+        <SearchBar v-on:darkChanged="darkChanged" v-on:envoieVille="villeRecu"/>
+        <SelectButtons v-on:switchChange="switchValue"/>
+        <div v-if="this.restauSelect==true"> 
+          <ListeRestau v-bind:ville="ville"/>
+        </div>
+        <div v-else>
+          <ListeBar v-bind:ville="ville"/>
+        </div>
       </div>
     </v-content>
   </v-app>
@@ -18,23 +24,41 @@
 <script>
 import SearchBar from './components/SearchBar';
 import ListeRestau from './components/ListeRestau';
-
+import SelectButtons from './components/SelectButtons';
+import ListeBar from './components/ListeBar';
+import BeerApi from './beerApi.js';
 export default {
   name: 'App',
 
   components: {
     SearchBar,
-    ListeRestau
+    ListeRestau,
+    SelectButtons,
+    ListeBar,
   },
 
   data: () => ({
-    ville : ''
+    ville : '',
+    restauSelect : true,
+
   }),
   methods :{
     villeRecu : function(data){
       this.ville = data;
       console.log('ville recu : '+data);
+    },
+    switchValue : function(data){
+      console.log('evenement recu, valeur : '+data);
+      this.restauSelect = data
+    },
+    darkChanged : function(data){
+      console.log('evenement recu')
+      this.$vuetify.theme.dark = data
     }
+  },
+  mounted(){
+    BeerApi.getBieres(691).then(data=>console.log(data)).catch(err=>console.log(err));
+
   }
 };
 </script>
