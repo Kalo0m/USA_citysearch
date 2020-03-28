@@ -71,7 +71,7 @@
               md="4"
               lg="3"
             > 
-            {{ville}}
+            
               <RestauItem v-bind:restaurant="item" v-bind:keys="keys" v-bind:sortBy="sortBy"/>
             </v-col>
           </v-row>

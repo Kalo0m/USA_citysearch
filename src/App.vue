@@ -50,6 +50,23 @@ export default {
       const ville = this.ville.split(',')[0];
       zomato.getRestaurantsByCity(ville).then(data=>{
         this.restaurants = data.restaurants.map(item=>item.restaurant);
+        this.restaurants = this.restaurants.map(restaurant=>{
+          if(typeof restaurant.phone_numbers != undefined && typeof restaurant.phone_numbers != 'string')restaurant.phone_numbers = restaurant.phone_numbers.split(',')[0];
+          if(typeof restaurant.cuisines != undefined && typeof restaurant.cuisines != 'string')restaurant.cuisines = restaurant.cuisines.split(',')[0];
+          if(typeof restaurant.location != undefined)restaurant.location = restaurant.location.address;
+          if(typeof restaurant.highlights != undefined && typeof restaurant.highlights != 'string')restaurant.highlights = restaurant.highlights[0];
+          if(typeof restaurant.user_rating != undefined)restaurant.user_rating = restaurant.user_rating.aggregate_rating;
+          console.log('restau');
+          console.log(restaurant);
+          if(Object.keys(restaurant).includes('photos') == false)restaurant.photos = 'https://upload.wikimedia.org/wikipedia/commons/e/e6/Pas_d%27image_disponible.svg';
+          else {
+            console.log(restaurant.photos[0].photo.url);
+            restaurant.photos = restaurant.photos[0].photo.url;
+          }
+          return restaurant
+        })
+        console.log('les restaus');
+        console.log(this.restaurants[0])
       }).catch(err=>console.log('erreur : '+err));
     },
     switchValue : function(data){

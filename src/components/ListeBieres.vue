@@ -1,6 +1,6 @@
 <template>
 <div>
-  <v-card>
+  <v-card class="dialog pa-10">
     <v-card-title class=" font-weight-bold text-center">{{bar.name_breweries}}</v-card-title>
        <v-row>
           <v-col
@@ -25,18 +25,16 @@
                   <v-list-item-content>Catégorie :</v-list-item-content>
                   <v-list-item-content class="align-end">{{ item.cat_name }}</v-list-item-content>
                 </v-list-item>
-                <v-list-item>
-                  <v-list-item-content>Site externe :</v-list-item-content>
-                  <v-list-item-content class="align-end">{{ item.website }}</v-list-item-content>
-                </v-list-item>
+                
 
                  </v-list>
-
+        
                 
             </v-card>
 
           </v-col>
        </v-row>
+       
   </v-card>
                 <!--<v-btn
                     color="green darken-1"
@@ -73,3 +71,10 @@ export default {
     }
 }
 </script>
+<style scoped>
+.dialog{
+    overflow-X:none
+
+  }
+
+</style>

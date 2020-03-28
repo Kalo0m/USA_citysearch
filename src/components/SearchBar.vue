@@ -89,7 +89,7 @@
       outlined
       type="error"
     >
-      Le pays entré n'est pas bon, veuillez utiliser l'autocomplation
+      La ville entrée n'est pas bonne, veuillez utiliser l'autocomplation
     </v-alert>
   </v-card>
 </template>
@@ -150,6 +150,5 @@ export default {
     width:80%;
     padding : 15px 20px;
   }
-  .alert{
-  }
+  
 </style>

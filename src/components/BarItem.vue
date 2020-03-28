@@ -5,6 +5,7 @@
         >
         
             <v-card :elevation="hover ? 16 : 2 " >
+              <v-card-title class="subheading font-weight-bold">{{ bar.name_breweries }}</v-card-title>
 
               <v-divider></v-divider>
               
@@ -26,7 +27,8 @@
         </v-hover>
             <v-dialog
             v-model="dialog"
-            max-width="60vw"
+            max-width="50vw"
+            class="dialog"
             >
                 <ListeBieres v-bind:bar="bar" />
             
@@ -59,7 +61,7 @@
     computed: {
       
       filteredKeys () {
-        return this.keys.filter(key => key !== `name` && key !== `photos` )
+        return this.keys.filter(key => key !== `name_breweries`  )
       },
     },
   }
@@ -73,6 +75,10 @@
   }
   .title-container{
     position:relative
+  }
+  .dialog{
+    overflow-X:none
+
   }
 
   </style>
