@@ -1,5 +1,6 @@
 <template>
   <div class='margin'>
+    
     <v-container fluid class="container">
       <v-data-iterator
         :items="restaurants"
@@ -61,7 +62,6 @@
           </v-toolbar>
         </template>
         <template v-slot:default="props">
-      
           <v-row class="margin" >
             <v-col
               v-for="item in props.items"
@@ -71,6 +71,7 @@
               md="4"
               lg="3"
             > 
+            {{ville}}
               <RestauItem v-bind:restaurant="item" v-bind:keys="keys" v-bind:sortBy="sortBy"/>
             </v-col>
           </v-row>
@@ -137,7 +138,6 @@
 
 <script>
   
-  import zomato from "../zomato.js";
   import RestauItem from './RestauItem';
 
   export default {
@@ -146,7 +146,7 @@
     components: {
       RestauItem
     },
-    props : ['ville'],
+    props : ['restaurants'],
     data: () => ({
       itemsPerPageArray: [4, 8, 12],
       pagination: {
@@ -169,34 +169,9 @@
         'price_range',
         'average_cost_for_two'
       ],
-      restaurants : [],
     }),
     
-    mounted() {
-      console.log("montage");
-      const ville = this.ville.split(',')[0];
-      console.log('premier element : '+ville);
-      zomato.getRestaurantsByCity(ville).then(data=>{
-        this.restaurants = data.restaurants.map(item=>item.restaurant);
-        console.log(this.restaurants);
-        //this.restaurantsFiltre = this.restaurants.filter(data=>Object.keys(data).map(key=>this.keys.includes(key)))
-        /*
-
-        var tab = this.restaurants.map(item => Object.entries(item));
-        tab.map(item=>item.filter(attribut=>{
-          var tri = []
-          console.log(this.keys);
-          console.log(attribut[0]);
-          console.log(this.keys.includes(attribut[0]));
-          if(this.keys.includes(attribut[0])){
-            tri.push(attribut);
-          }
-        }));
-        console.log('restaus apres modif : ');
-        console.log(this.restaurantsFiltre);
-        */
-      }).catch(err=>console.log('erreur : '+err));
-    },
+    
     computed : {
       numberOfPages () {
         return Math.ceil(this.restaurants.length / this.itemsPerPage)

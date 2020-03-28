@@ -35,15 +35,7 @@ const useZomatoApi = {
               .catch(err => reject(err));
         })
     }),
-      byFood: search =>
-      new Promise((resolve, reject) => {
-        const MOVIE_API_URL = `https://www.omdbapi.com/?i=${search}&plot=full&apikey=${API_KEY}`;
-
-        fetch(MOVIE_API_URL)
-          .then(response => response.json())
-          .then(jsonResponse => resolve(jsonResponse))
-          .catch(err => reject(err));
-      })
+      
 };
 //useMovieApi.byCity("");
 export default useZomatoApi;

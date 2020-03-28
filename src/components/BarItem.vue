@@ -4,11 +4,10 @@
             v-slot:default="{ hover }"
         >
         
-            <v-card :elevation="hover ? 16 : 2 " @click="barSelected">
-              <v-card-title class="subheading font-weight-bold">{{ bar.name_breweries }}</v-card-title>
+            <v-card :elevation="hover ? 16 : 2 " >
 
               <v-divider></v-divider>
-
+              
               <v-list dense>
                 <v-list-item
                   v-for="(key, index) in filteredKeys"
@@ -20,7 +19,7 @@
               </v-list>
                       <div class="text-right ">
                             <v-btn class="ma-5" rounded color="blue-grey darken-4
-                            " dark>Rounded Button</v-btn>
+                            " @click="barSelected" dark>Voir les bières</v-btn>
                         </div>
 
             </v-card>

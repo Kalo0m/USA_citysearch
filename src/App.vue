@@ -11,7 +11,7 @@
         <SearchBar v-on:darkChanged="darkChanged" v-on:envoieVille="villeRecu"/>
         <SelectButtons v-on:switchChange="switchValue"/>
         <div v-if="this.restauSelect==true"> 
-          <ListeRestau v-bind:ville="ville"/>
+          <ListeRestau v-bind:restaurants="restaurants"/>
         </div>
         <div v-else>
           <ListeBar v-bind:ville="ville"/>
@@ -22,11 +22,12 @@
 </template>
 
 <script>
+  import zomato from "./zomato.js";
+
 import SearchBar from './components/SearchBar';
 import ListeRestau from './components/ListeRestau';
 import SelectButtons from './components/SelectButtons';
 import ListeBar from './components/ListeBar';
-import BeerApi from './beerApi.js';
 export default {
   name: 'App',
 
@@ -40,12 +41,16 @@ export default {
   data: () => ({
     ville : '',
     restauSelect : true,
-
+    restaurants : []
   }),
   methods :{
     villeRecu : function(data){
       this.ville = data;
-      console.log('ville recu : '+data);
+      console.log("coomposant updated");
+      const ville = this.ville.split(',')[0];
+      zomato.getRestaurantsByCity(ville).then(data=>{
+        this.restaurants = data.restaurants.map(item=>item.restaurant);
+      }).catch(err=>console.log('erreur : '+err));
     },
     switchValue : function(data){
       console.log('evenement recu, valeur : '+data);
@@ -56,10 +61,7 @@ export default {
       this.$vuetify.theme.dark = data
     }
   },
-  mounted(){
-    BeerApi.getBieres(691).then(data=>console.log(data)).catch(err=>console.log(err));
-
-  }
+  
 };
 </script>
 

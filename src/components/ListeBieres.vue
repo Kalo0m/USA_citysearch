@@ -1,9 +1,11 @@
 <template>
 <div>
+  <v-card>
+    <v-card-title class=" font-weight-bold text-center">{{bar.name_breweries}}</v-card-title>
        <v-row>
           <v-col
             :key = "item.id" v-for="item in this.bieres"
-            cols="12"
+            cols="2"
             sm="6"
             md="2"
             lg="3"
@@ -35,6 +37,7 @@
 
           </v-col>
        </v-row>
+  </v-card>
                 <!--<v-btn
                     color="green darken-1"
                     text
